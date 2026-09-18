@@ -1,4 +1,19 @@
 # Training a Reinforcement Learning Agent to Play Flappy Bird
+
+> **About this fork**
+>
+> This is a fork of [LukasDrews97/flappy-bird-reinforcement-learning](https://github.com/LukasDrews97/flappy-bird-reinforcement-learning). The training code, configs, experiments and results below are all Lukas Drews's work. The Flappy Bird Gym environment in `flappy_bird_gym/` comes from [Talendar/flappy-bird-gym](https://github.com/Talendar/flappy-bird-gym) by Gabriel Nogueira (MIT License, see `LICENSE`).
+>
+> **What the project does:** it trains agents to play Flappy Bird with two reinforcement-learning algorithms from [Stable-Baselines3](https://github.com/DLR-RM/stable-baselines3), A2C (Advantage Actor-Critic) and PPO (Proximal Policy Optimization). It covers two kinds of game input:
+> - the **simple** environment, where the agent sees just two numbers: the horizontal distance to the next pipe and the vertical distance to the centre of its gap;
+> - the **RGB** environment, where the agent sees the screen itself, converted to grayscale, resized to 84×84 and stacked 4 frames deep (8 in one config) so it can sense motion.
+>
+> Each can be paired with an MLP or a CNN policy. Every run is described by a YAML file in `config/`. There is also Optuna-based hyperparameter tuning (`hyperparameter_tuning.py`) over learning rate, `n_steps` and gamma. The best result reported below is 1,840 frames survived, by PPO with an MLP policy on the simple environment after tuning.
+>
+> **Changes in this fork**
+> - `requirements.txt`: removed `pywin32==304`, which exists only on Windows and makes `pip install -r requirements.txt` fail on macOS and Linux. Also removed `scikit-learn==1.1.2` and `scipy==1.9.0`, which none of the project's Python files import.
+> - The rest of the code is unchanged from upstream.
+
 In this project, I trained multiple agents to play the game Flappy Bird using Advantage Actor Critic (A2C) and Proximal Policy Optimization (PPO). There are two environments to choose from, one using only player coordinates to represent state (simple environment) and one using pixel values (rgb environment). Furthermore, there are two policies to choose from, one using a multilayer perceptron (mlp policy) and one using convolution neural networks (cnn policy).
 
 ## Install
